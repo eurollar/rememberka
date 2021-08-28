@@ -21,6 +21,6 @@ urlpatterns = [
     # Get all events for month. User choose month and get info - POST
     path('get-for-month/', views.EventGroupData.as_view(), name='month-events'),
 
-    # Get all user's country holidays - GET (POST)
+    # Get all user's country holidays - GET
     path('get-holidays/', views.GetHolidays.as_view(), name='holidays'),
 ]
