@@ -71,7 +71,8 @@ Endpoints:
 Запуск
 Для запуска проекта на localhost необходимо установить Docker, зайти в папку проекта, где лежит файл "docker-compose" и запустить в консоли командами "docker-compose build", а затем "docker-compose up". Для запуска тестов необходимо запустить сервер, открыть новую консоль, перейти в папку проекта, где есть файл "docker-compose" и запустить командой в консоли "docker exec -it <namedockercontainer> python3 manage.py test", где <namedockercontainer> - имя контейнера Dokcer (можно узнать в консоли командой "docker ps", найти в столбце "IMAGE" "planner_web" и посмотреть столбец "NAMES" - это и есть имя контейнера Docker).
 Для создания суперпользователя необходимо выполнить команду в консоли "docker exec -it <namedockercontainer> python3 manage.py createsuperuser". Затем ввести имя, пароль и email для суперпользователя.
-Отправка email происходит через smtp Google. Необходимо в файле проекта "settings.py" отредактировать строчки (номера 171 и 172) "EMAIL_HOST_USER = <youremail>" и "EMAIL_HOST_PASSWORD = <yourpassword>", где <youremail> - Ваша почта gmail, <yourpassword> - пароль от почты. В настройках почты Google для отправки писем, необходимо включить IMAP-доступ.
+Отправка email происходит через smtp Google. Необходимо в файле проекта "settings.py" отредактировать строчки (номера 171 и 172) "EMAIL_HOST_USER = <youremail>" и "EMAIL_HOST_PASSWORD = <yourpassword>", где <youremail> - Ваша почта gmail, <yourpassword> - пароль от почты. Также, необходимо отредактировать почту в файле "tasks.py", функции "send_reg_mail" и "send_remind". В строчках 16 и 31 необходимо вписать свою gmail почту, вместо 'yourgmail'.
+В настройках почты Google для отправки писем, необходимо включить IMAP-доступ.
 Открытие IMAP-доступа:
 1) Откройте Gmail в браузере;
 2) В правом верхнем углу нажмите на значок "Настройки" > "Настройки" > "Все настройки"$;
@@ -88,7 +89,7 @@ Endpoints:
 4) За день;
 5) За 3 дня;
 6) За неделю.
-В файле "utils.py" есть функция "convert_date", которая вычисляет время для отправки письма с уведомлением. Для добавления своих значений необходимо также написать в функции вычисления для новых значений.
+В файле "utils.py" есть функция "convert_date", которая вычисляет время для отправки письма с уведомлением. Для добавления своих значений необходимо также написать в функции вычисления для новых значений. Все значения по умолчанию загружаются из файла json в папке "fixtures". Туда можно добавить собственные значения, отредактировать или удалить имеющиеся в формате json.
 
 Application description.
 The Rememberka calendar app is designed to record user events and notify you of upcoming events. The application also displays the national holidays of the country indicated during the user's registration.
@@ -163,7 +164,8 @@ The backend is implemented using DRF, with a PostreSQL database. Sending email a
 Running
 In order to start the project on localhost you need to install Docker, go to the project folder where the file "docker-compose" is and run in the console with the commands "docker-compose build" and then "docker-compose up". To run tests, start the server, open a new console, go to the project folder where the file "docker-compose" is and run the command "docker exec -it <namedockercontainer> python3 manage.py test" in the console, where <namedockercontainer> is the name of the Docker container (can be found in the console by command "docker ps", find "planner_web" in the "IMAGE" column and see the "NAMES" column - that is the Docker container name).
 To create a superuser, run the command in the console "docker exec -it <namedockercontainer> python3 manage.py createsuperuser". Then enter the name, password, and email for the superuser.
-Sending the email is done via Google smtp. It is necessary to edit lines (numbers 171 and 172) "EMAIL_HOST_USER = <youremail>" and "EMAIL_HOST_PASSWORD = <yourpassword>" in file "settings.py" where <youremail> - your mail gmail, <yourpassword> - password from mail. In your Google mail settings, you need to enable IMAP access to send emails.
+Sending the email is done via Google smtp. It is necessary to edit lines (numbers 171 and 172) "EMAIL_HOST_USER = <youremail>" and "EMAIL_HOST_PASSWORD = <yourpassword>" in file "settings.py" where <youremail> - your mail gmail, <yourpassword> - password from mail. Also, you need to edit the mail in the "tasks.py" file, the functions "send_reg_mail" and "send_remind". In lines 16 and 31 you have to write your gmail instead of 'yourgmail'.
+In your Google mail settings, you need to enable IMAP access to send emails.
 Opening IMAP access:
 1) Open Gmail in your browser;
 2) In the upper right corner, click the Settings icon > Settings > All Settings $;
@@ -180,4 +182,4 @@ The following values are created in the "Remind" database model during the start
 4) Per day;
 5) In 3 days;
 6) per week.
-In the file "utils.py" there is a function "convert_date", which calculates the time to send the notification letter. To add your own values, you must also write in the function calculations for new values.
+In the file "utils.py" there is a function "convert_date", which calculates the time to send the notification letter. To add your own values, you must also write in the function calculations for new values. All default values are loaded from the json file in the "fixtures" folder. You can add your own values there, edit or delete existing values in json format.
