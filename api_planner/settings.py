@@ -94,12 +94,6 @@ WSGI_APPLICATION = 'api_planner.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
 
 DATABASES = {
     'default': {
@@ -168,8 +162,8 @@ LOGOUT_ON_PASSWORD_CHANGE = True
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_SSL = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'fakekrolchatka@gmail.com'
-EMAIL_HOST_PASSWORD = 'nxfKYMb7qj2YRM3'
+EMAIL_HOST_USER = 'yourgmail'
+EMAIL_HOST_PASSWORD = 'yourpassword'
 EMAIL_PORT = 465
 
 # Settings fo Celery
