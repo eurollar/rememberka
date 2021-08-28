@@ -13,7 +13,7 @@ def send_reg_mail(username, email, password):
         f'Your login: {username} \n'
         f'Your email: {email} \n'
         f'Your pass: {password}',
-        'fakekrolchatka@gmail.com',
+        'yourgmail',
         [email],
         fail_silently=False
     )
@@ -28,7 +28,7 @@ def send_remind(**kwargs):
         f'Dear {kwargs["user"]}! You have planned an event {kwargs["event"]}\n'
         f'This event begins: {kwargs["start date"]} {kwargs["start time"]} \n'
         f'Sincerely with love!',
-        'fakekrolchatka@gmail.com',
+        'yourgmail',
         [kwargs['email']],
         fail_silently=False
     )
