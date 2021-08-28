@@ -106,22 +106,27 @@ class UserCreate(APIView):
         if serializer.is_valid():
             user = serializer.save()
 
-            # Send email with login and pass
-            try:
-                send_reg_mail_task.delay(request.data['username'], request.data['email'], request.data['password'])
-            except TimeoutError:
-                print("Email is not send")
-
-            try:
-                #  Update field Country holiday
-                get_country_holidays_task.delay(user.id)
-            except TimeoutError:
-                print("Doesn't get holidays")
-
             if user:  # Create token for new user
                 token = Token.objects.create(user=user)
                 json = serializer.data
                 json['token'] = token.key
+
+                # Send email with login and pass
+                try:
+                    send_reg_mail_task.delay(
+                        request.data['username'],
+                        request.data['email'],
+                        request.data['password'],
+                        json['token']
+                    )
+                except TimeoutError:
+                    print("Email is not send")
+
+                try:
+                    #  Update field Country holiday
+                    get_country_holidays_task.delay(user.id)
+                except TimeoutError:
+                    print("Doesn't get holidays")
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
