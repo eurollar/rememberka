@@ -1,0 +1,44 @@
+[
+  {
+    "model": "api_calendar.remind",
+    "pk": 1,
+    "fields": {
+      "title": "За час"
+    }
+  },
+  {
+    "model": "api_calendar.remind",
+    "pk": 2,
+    "fields": {
+      "title": "За 2 часа"
+    }
+  },
+    {
+    "model": "api_calendar.remind",
+    "pk": 3,
+    "fields": {
+      "title": "За 4 часа"
+    }
+  },
+    {
+    "model": "api_calendar.remind",
+    "pk": 4,
+    "fields": {
+      "title": "За день"
+    }
+  },
+    {
+    "model": "api_calendar.remind",
+    "pk": 5,
+    "fields": {
+      "title": "За 3 дня"
+    }
+  },
+    {
+    "model": "api_calendar.remind",
+    "pk": 6,
+    "fields": {
+      "title": "За неделю"
+    }
+  }
+]

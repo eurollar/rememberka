@@ -1,0 +1,45 @@
+version: "3"
+
+services:
+ web:
+  build:
+   context: .
+   dockerfile: Dockerfile
+  container_name: django
+  volumes:
+   - .:/src
+  env_file:
+   - db_keys.txt
+  ports:
+   - "8000:8000"
+  depends_on:
+   - db
+   - redis
+  command: bash -c "python3 manage.py makemigrations && python3 manage.py migrate && python3 manage.py loaddata api_calendar/fixtures/fixtureremindmodel.json && python3 manage.py runserver 0.0.0.0:8000"
+
+ db:
+  image: postgres:latest
+  container_name: postgres
+  env_file:
+   - db_keys.txt
+  ports:
+   - "5432:5432"
+
+ redis:
+  image: redis:latest
+  container_name: redis_db
+
+ celery:
+  build:
+   context: .
+   dockerfile: Dockerfile
+  container_name: celery_w
+  volumes:
+   - .:/src
+  env_file:
+   - db_keys.txt
+  depends_on:
+   - redis
+  ports:
+   - '5555:5555'
+  command: bash -c 'celery -A api_planner worker -c 5 -l info -B & celery -A api_planner flower'
