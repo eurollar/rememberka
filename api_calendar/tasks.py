@@ -6,13 +6,14 @@ from api_calendar.utils import parse_country_holidays
 
 # Task to send email with login and password
 @shared_task
-def send_reg_mail(username, email, password):
+def send_reg_mail(username, email, password, token):
     send_mail(
         'You register on site',
         f'You register on site. You can log with email or login\n'
         f'Your login: {username} \n'
         f'Your email: {email} \n'
-        f'Your pass: {password}',
+        f'Your pass: {password}\n'
+        f'Your token: {token}',
         'yourgmail',
         [email],
         fail_silently=False
